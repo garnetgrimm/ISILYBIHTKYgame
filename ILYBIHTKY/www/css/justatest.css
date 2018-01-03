@@ -1,0 +1,8 @@
+.modal-content {
+	font-family: 'Balthazar';
+	font-size: 1em;
+	background-color: rgba(0, 0, 12, 0.3);
+	color: rgba(0, 239, 219, 0.7);
+	text-align: center;
+	z-index: 10000000;
+}

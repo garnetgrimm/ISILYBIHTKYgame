@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+        <style type="text/css">
+		    body {
+				margin: 0px;
+				padding: 0px;
+			}
+			@font-face {
+				font-family: 'Balthazar';
+				src: url('Balthazar.ttf') format('truetype');
+				font-weight: normal;
+				font-style: normal;
+			}
+		
+            /* Set a size for our map container, the Google Map will take up 100% of this container */
+			canvas {
+				position: absolute;
+				z-index: -10;
+			}
+			button {
+				font-family: 'Balthazar';
+				font-size: 64px;
+				map-color: rgba(0, 0, 12, 0.3);
+				color: rgba(0, 239, 219, 0.7);
+				width:500px;
+				text-align: left;
+			}
+        </style>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+    <script>
+	
+		x = window.innerWidth;
+		y = 0;
+		waeponryY = 0;
+		backgroundSizeX = 128;
+		backgroundSizeY = 128;
+		
+		var canvas = document.getElementById('myCanvas');
+		var context = canvas.getContext('2d');
+		
+		var imageObj = new Image();
+		imageObj.src = 'BIGSword.png';
+		
+		
+		var backround = new Image();
+		backround.src = 'BIGsteel.png';
+		
+		
+		var weapons = []
+		
+		weapons.push('WeaponIcon.png');
+		weapons.push('BombIcon.png');
+		weapons.push('GunIcon.png');
+		weapons.push('AnidoteIcon.png');
+		weapons.push('SkullIcon.png');
+		
+		for(var i = 0; i < weapons.length; i++) {
+			var img = new Image();
+			img.src = weapons[i];
+			weapons[i] = img;
+		}
+		
+		var map = new Image();	
+				
+	  function updateMap() {
+		map.src = 'https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=' + 256 + 'x' + 256 + '&style=feature:all|element:labels.text.fill|color:0xffffff&style=feature:all|element:labels.text.stroke|color:0x000000|lightness:13&style=feature:administrative|element:geometry.fill|color:0x000000&style=feature:administrative|element:geometry.stroke|color:0x144b53|lightness:14|weight:1.4&style=feature:landscape|element:all|color:0x08304b&style=feature:poi|element:geometry|color:0x0c4152|lightness:5&style=feature:road.highway|element:geometry.fill|color:0x000000&style=feature:road.highway|element:geometry.stroke|color:0x0b434f|lightness:25&style=feature:road.arterial|element:geometry.fill|color:0x000000&style=feature:road.arterial|element:geometry.stroke|color:0x0b3d51|lightness:16&style=feature:road.local|element:geometry|color:0x000000&style=feature:transit|element:all|color:0x146474&style=feature:water|element:all|color:0x021019';
+	  }
+	  
+	  updateMap();
+	  
+	  function update() {
+			imgSize =  window.innerHeight / weapons.length;
+	  		context.canvas.width  = window.innerWidth;
+			context.canvas.height = window.innerHeight;
+			x = canvas.width / 2 - imageObj.width / 2;
+			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+			for(var i = 0; i < context.canvas.width/backgroundSizeX; i++)
+				for(var n = 0; n < context.canvas.height/backgroundSizeY; n++)
+					context.drawImage(backround, i * backgroundSizeX, n * backgroundSizeY, backgroundSizeX, backgroundSizeY);
+			context.drawImage(map, 0,0,window.innerWidth/3,window.innerWidth/3);
+			context.fillStyle = "black";
+			context.fillRect(0, window.innerWidth/3, window.innerWidth/3, 35);
+			context.font = "20px Balthazar";
+			context.fillStyle = "cyan";
+			context.textAlign = "center";
+			context.fillText("Target: Garnet Grimm", window.innerWidth/3/2,0);
+			context.drawImage(imageObj, x,y);
+			for(var i = 0; i < weapons.length; i++) {
+				context.drawImage(weapons[i], window.innerWidth - imgSize, (i * imgSize) , imgSize, imgSize);
+			}
+	  }
+	  
+	  document.onmousemove = function (e) {mousePos(e);};
+	  
+	    function mousePos (e) {
+			//x = event.clientX + document.body.scrollLeft - (640 / 2);
+			y = event.clientY + document.body.scrollTop - (window.innerHeight / 2);
+
+			return true;
+		}
+	  
+	  setInterval(update, 1);
+	  //setInterval(updateMap, 5000);
+    </script>
+  </body>
+</html>      

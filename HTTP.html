@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    var funcID = 0;
+	var funcRoutes = [ "addPlayer", "removePlayer", "createLobby", "removeLobby", "startGame", "signup" ];
+	
+	$submitForm = function() {
+	
+		var fd = new FormData();
+
+		if(funcID == 1 || funcID == 2) {
+			fd.append( 'hostname', $('#hostname').val() );
+			fd.append( 'username', $('#username').val() );
+			fd.append( 'password', $('#password').val() );
+		} else if(funcID >= 3 && funcID <= 5) {
+			fd.append( 'hostname', $('#hostname').val() );
+			fd.append( 'password', $('#password').val() );
+		} else if(funcID == 6) {
+			fd.append( 'fn', $('#fn').val() );
+			fd.append( 'ln', $('#ln').val() );
+			fd.append( 'un', $('#un').val() );
+			fd.append( 'pw', $('#pw').val() );
+		}
+		
+		$.ajax({
+			type: 'POST',
+			url: 'http://localhost:5000/' + funcRoutes[funcID - 1],
+			crossDomain: true,
+			data: fd,
+			processData: false,
+			contentType: false,
+			success: function(responseData, textStatus, jqXHR) {
+				alert(responseData);
+			},
+			error: function (responseData, textStatus, errorThrown) {
+				alert('POST failed.');
+			}
+		});
+    }
+	
+	function HnPwUn() {
+		$form = $('<form></form>');
+		$form.append('<input type="text" id="hostname" placeholder="Host Username">');
+		$form.append('<br>');
+		$form.append('<input type="password" id="password" placeholder="Host Password"">');
+		$form.append('<br>');
+		$form.append('<input type="text"  id="username" placeholder="Player Username">');
+		$form.append('<br>');
+		$form.append('<input type="button" value="Submit" onClick="$submitForm()">');
+		$form.append('<br>');
+		$form.append('<br>');
+		
+		$("#inputForm").html($form);
+	};
+	
+	function HnPw() {
+		$form = $('<form></form>');
+		$form.append('<input type="text" id="hostname" placeholder="Your Username">');
+		$form.append('<br>');
+		$form.append('<input type="password" id="password" placeholder="Your Password"">');
+		$form.append('<br>');
+		$form.append('<input type="button" value="Submit" onClick="$submitForm()">');
+		$form.append('<br>');
+		$form.append('<br>');
+		
+		$("#inputForm").html($form);
+	};
+	
+	function FnLnUnPw() {
+		$form = $('<form></form>');
+		$form.append('<input type="text" id="fn" placeholder="First Name">');
+		$form.append('<br>');
+		$form.append('<input type="text" id="ln" placeholder="Last Name">');
+		$form.append('<br>');
+		$form.append('<input type="text" id="un" placeholder="Username">');
+		$form.append('<br>');
+		$form.append('<input type="password" id="pw" placeholder="Password"">');
+		$form.append('<br>');
+		$form.append('<input type="button" value="Submit" onClick="$submitForm()">');
+		$form.append('<br>');
+		$form.append('<br>');
+		
+		$("#inputForm").html($form);
+	};
+	
+	$("#addPlayer").click(function(){
+		funcID = 1;
+		HnPwUn();
+	});
+	
+	$("#removePlayer").click(function(){
+		funcID = 2;
+		HnPwUn();
+	});
+	
+	$("#createLobby").click(function(){
+		funcID = 3;
+		HnPw();
+	});
+	
+	$("#removeLobby").click(function(){
+		funcID = 4;
+		HnPw();
+	});
+	
+	$("#startGame").click(function(){
+		funcID = 5;
+		HnPw();
+	});
+	
+	$("#signup").click(function(){
+		funcID = 6;
+		FnLnUnPw();
+	});
+	
+});
+</script>
+</head>
+<body>
+
+<div id="inputForm">
+</div>
+
+<button id="addPlayer">+ Player</button>
+<button id="removePlayer">- Player</button>
+<button id="createLobby">+ Lobby</button>
+<button id="removeLobby">- Lobby</button>
+<button id="startGame">Start Game</button>
+<button id="signup">Sign Up</button>
+<!-- <button id="getStats">Get Stats</button> -->
+
+</body>
+</html>

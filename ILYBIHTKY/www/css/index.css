@@ -1,0 +1,134 @@
+@font-face {
+	font-family: 'Balthazar';
+	src: url('../fonts/Balthazar.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+/* Set a size for our map container, the Google Map will take up 100% of this container */
+#map {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	z-index: -10;
+}
+#interface {
+    width: 250px;
+    height: 50%;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+	text-align: center;
+}
+
+.modal-content {
+	font-family: 'Balthazar';
+	font-size: 1em;
+	background-color: rgba(0, 0, 12, 0.8);
+	color: rgba(0, 239, 219, 0.7);
+	text-align: center;
+	z-index: 10;
+}
+
+.noIcon {
+	font-family: 'Balthazar';
+	font-size: 3em;
+	background-color: rgba(0, 0, 12, 0.3);
+	color: rgba(0, 239, 219, 0.7);
+	text-align: center;
+	width: 250px;
+}
+
+#blocker {
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	padding: 100%;
+	display:block;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+@font-face {
+	font-family: 'Balthazar';
+	src: url('Balthazar.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+canvas {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -5;
+}
+
+.UI {
+	font-family: 'Balthazar';
+	font-size: 24pt;
+	background-color: rgba(0, 0, 12, 0.6);
+	color: rgba(0, 239, 219, 1);
+	text-align: center;
+	width: 25vw;
+}
+
+.M {
+	width: 40vw;
+}
+
+.L {
+	width: 50vw;
+}
+
+.bottom {
+	position: fixed;
+	bottom: 25px;
+}
+
+.playerText {
+	font-family: 'Balthazar';
+	font-size: 24pt;
+	background-color: rgba(0, 0, 12, 0.4);
+	color: rgba(0, 239, 219, 1);
+	border-style: outset;
+	border-color: rgba(0, 239, 219, 0.4);
+	text-align: center;
+	width: 50vw;
+}
+
+.playerTextDiv {
+	overflow-y: scroll; 
+	height:50vh;
+	background-color: rgba(0, 0, 12, 0.4);
+}
+
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: rgba(0, 0, 12, 0.6);
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: #0ae;
+	
+	background-image: -webkit-gradient(linear, 0 0, 0 100%,
+	                   color-stop(.5, rgba(255, 255, 255, .2)),
+					   color-stop(.5, transparent), to(transparent));
+}
